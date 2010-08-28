@@ -49,11 +49,11 @@ namespace nulloader
             });
         }
 
-        public void OperateOnMenu(Action<MenuStrip> Operations)
+        protected void OperateOnMenu(Action<MenuStrip> Operations)
         {
             Globals.NullularGrapherMainForm.Invoke((MethodInvoker)(() => Operations(Globals.MainMenu)));
         }
-        public bool OperateOnMenu(string Path, Action<ToolStripMenuItem> Operations)
+        protected bool OperateOnMenu(string Path, Action<ToolStripMenuItem> Operations)
         {
             var pathlets = Path.Split('/').Select(s => s.Trim());
             var ms = Globals.MainMenu.Items.Cast<ToolStripMenuItem>().Where(mi => mi.Text == pathlets.First()).FirstOrDefault();
