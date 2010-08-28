@@ -14,7 +14,11 @@ namespace TestPlugin
         public TestPlugin()
         {
             RegisterMenuItem((s, e) => MessageBox.Show("Hello, world!"));
-            var tabpage = CreateEditorTab("test tab :D");
+
+            OperateOnControl(CreateEditorTab("test tab :D"), tabpage =>
+            {
+                new Label { Text = "Hello, World!", Parent = tabpage, Left = 50, Top = 50 };
+            });
 
             TwoDimensionalGraph.XAxisColor = Color.Black;
             TwoDimensionalGraph.YAxisColor = Color.Black;
