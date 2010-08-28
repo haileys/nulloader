@@ -7,3 +7,6 @@ d:\documents\visual studio 2010\Projects\nulloader\TestPlugin\bin\Release\nulloa
 d:\documents\visual studio 2010\Projects\nulloader\TestPlugin\obj\Release\ResolveAssemblyReference.cache
 d:\documents\visual studio 2010\Projects\nulloader\TestPlugin\obj\Release\TestPlugin.dll
 d:\documents\visual studio 2010\Projects\nulloader\TestPlugin\obj\Release\TestPlugin.pdb
+d:\documents\visual studio 2010\Projects\nulloader\TestPlugin\obj\Release\TestPlugin.Properties.Resources.resources
+d:\documents\visual studio 2010\Projects\nulloader\TestPlugin\obj\Release\GenerateResource.read.1.tlog
+d:\documents\visual studio 2010\Projects\nulloader\TestPlugin\obj\Release\GenerateResource.write.1.tlog

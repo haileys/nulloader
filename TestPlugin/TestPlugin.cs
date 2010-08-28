@@ -7,7 +7,18 @@ using nulloader;
 
 namespace TestPlugin
 {
-    public class TestPlugin : Plugin
+    [PluginName("Test Plugin")]
+    public class TestPlugin : Plugin, IPluginIcon
     {
+        public TestPlugin()
+        {
+            RegisterMenuItem((s, e) => MessageBox.Show("Hello, world!"));
+            var tabpage = CreateEditorTab("test tab :D");
+        }
+
+        public System.Drawing.Image GetIcon()
+        {
+            return Properties.Resources.emoticon_tongue;
+        }
     }
 }
