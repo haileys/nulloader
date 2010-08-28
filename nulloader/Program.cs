@@ -36,7 +36,7 @@ namespace nulloader
                     ilist.Images.Add("nulloader_plugin", Resources.plugin);
                 }
 
-                var graph = Globals.grapherControls.Where(x => x.Name == "graphPanel").Single();
+                var graph = Globals.grapherControls["graphPanel"];
 
                 Globals.MainMenu.Items.Add(
                     new ToolStripMenuItem("Plugins", null,
