@@ -1,3 +1,4 @@
 grapher.exe
 glhelper.dll
 *.suo
+*/obj/*

@@ -16,7 +16,7 @@ namespace TestPlugin
             RegisterMenuItem((s, e) => MessageBox.Show("Hello, world!"));
             var tabpage = CreateEditorTab("test tab :D");
 
-            TwoDimensionalGraph.BackgroundColor = Color.Black;
+            TwoDimensionalGraph.BackgroundColor = Color.SkyBlue;
         }
 
         public System.Drawing.Image GetIcon()
