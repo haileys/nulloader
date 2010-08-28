@@ -7,7 +7,7 @@ using nulloader;
 
 namespace TimeToggleButton 
 {
-    [PluginName("Toggle Button for Time")]
+    [PluginName("Time toggle button")]
     public class TimeToggleButton : Plugin
     {
         Button start;
