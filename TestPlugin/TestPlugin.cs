@@ -23,6 +23,9 @@ namespace TestPlugin
             TwoDimensionalGraph.XAxisColor = Color.Black;
             TwoDimensionalGraph.YAxisColor = Color.Black;
             TwoDimensionalGraph.DrawGridlines = false;
+
+            TwoDimensionalGraph.RegisterDrawHook(g => g.FillRectangle(Brushes.Red, new Rectangle(50, 50, 50, 50)));
+            TwoDimensionalGraph.Redraw();
         }
 
         public System.Drawing.Image GetIcon()
