@@ -20,12 +20,13 @@ namespace TimeToggleButton
             start.Click += start_Click;
             stop.Click += stop_Click;
 
-            stop.Invoke((MethodInvoker)(() => {
+            OperateOnControl(stop, _ =>
+            {
                 stop.Width = start.Width = (stop.Left + stop.Width) - start.Left;
                 stop.Left = start.Left;
                 stop.Hide();
                 start.Focus();
-            }));
+            });
         }
 
         void stop_Click(object sender, EventArgs e)

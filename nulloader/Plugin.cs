@@ -81,6 +81,11 @@ namespace nulloader
             return true;
         }
 
+        protected void OperateOnControl(Control control, Action<Control> action)
+        {
+            control.Invoke((MethodInvoker)(() => action(control)));
+        }
+
         protected TwoDimensionalGraph TwoDimensionalGraph { get { return Globals.TwoDGraph; } }
         protected ThreeDimensionalGraph ThreeDimensionalGraph { get { return Globals.ThreeDGraph; } }
     }
