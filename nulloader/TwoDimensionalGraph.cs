@@ -17,9 +17,7 @@ namespace nulloader
             var field_ZB = graph.Field("ZB");
 
             drawHooks.Add((Delegate)field_ZB.Get());
-            var delegate_type = Assembly.GetAssembly(typeof(A.F))
-                // public delegate in A.ZD (internal class)
-                .GetType("A.ZD+WD");
+            var delegate_type = Util.GetNullsType("A.ZD+WD");
 
             field_ZB.Set(DelegateUtility.Cast((Action<Graphics>)OnDraw, delegate_type));
         }

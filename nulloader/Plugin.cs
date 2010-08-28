@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Reflection;
+using A;
 
 namespace nulloader
 {
@@ -39,6 +40,22 @@ namespace nulloader
             if (Globals.grapherControls.ContainsKey(Name))
                 return Globals.grapherControls[Name];
             return null;
+        }
+
+        protected void RegisterFunction(string Name, int NumParams, Func<float[], float> Callback)
+        {
+            var fields = typeof(FB).GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            var dictobj = Globals.NullularGrapherMainForm.Field("LG").Get();
+
+            var del = DelegateUtility.Cast(Callback, Util.GetNullsType("A.FB+AB"));
+
+            dictobj.GetType().GetMethod("Add").Invoke(dictobj, new object[] { Name, del });
+            (Globals.NullularGrapherMainForm.Field("MG").Get() as Dictionary<string, int>).Add(Name, NumParams);
+        }
+
+        protected void RegisterConstant(string Name, float Value)
+        {
+            (Globals.NullularGrapherMainForm.Field("KG").Get() as Dictionary<string, float>).Add(Name, Value);
         }
 
         protected void RegisterMenuItem(EventHandler Click)

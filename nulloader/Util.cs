@@ -9,6 +9,12 @@ namespace nulloader
 {
     public static class Util
     {
+        public static Type GetNullsType(string FullName)
+        {
+            return Assembly.GetAssembly(typeof(A.A))
+                // public delegate in A.ZD (internal class)
+                .GetType(FullName);
+        }
         public static object CrossCall(this Control obj, string Method, params object[] args)
         {
             return obj.Invoke((MethodInvoker)(() => obj.GetType().GetMethod(Method).Invoke(obj, args)));

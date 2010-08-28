@@ -26,6 +26,9 @@ namespace TestPlugin
 
             TwoDimensionalGraph.RegisterDrawHook(g => g.FillRectangle(Brushes.Red, new Rectangle(50, 50, 50, 50)));
             TwoDimensionalGraph.Redraw();
+
+            RegisterConstant("charlie", 5);
+            RegisterFunction("hurr", 1, args => (float)Math.Sin(args[0]));
         }
 
         public System.Drawing.Image GetIcon()
