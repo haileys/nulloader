@@ -2,7 +2,7 @@
 Nulloader is an open source plugin loader and framework for [Nullular Grapher](http://nullular.com/grapher).
 
 ## Getting Started
-Just download the latest as a [*zip*](http://github.com/charliesome/nulloader/zipball/master) or [*tar*](http://github.com/charliesome/nulloader/tarball/master) archive (however the technically minded here can always `git pull` it down)
+Just download the latest as a [**zip**](http://github.com/charliesome/nulloader/zipball/master) or [**tar**](http://github.com/charliesome/nulloader/tarball/master) archive (however the technically minded here can always `git pull` it down)
 
 Extract everything in `nulloader\bin\Release` to your Nullular Grapher install folder and launch `nulloader.exe` everytime you wish to launch Nullular Grapher
 
