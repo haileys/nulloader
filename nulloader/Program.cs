@@ -24,7 +24,6 @@ namespace nulloader
 
             Globals.NullularGrapherMainForm = Application.OpenForms[0];
 
-            Globals.grapherControls = new List<Control>();
             PopulateControlsList(Globals.NullularGrapherMainForm);
 
             // cross-thread setup stuff here
@@ -63,7 +62,9 @@ namespace nulloader
 
         public static void PopulateControlsList(Control c)
         {
-            (Globals.grapherControls as List<Control>).Add(c);
+            if (!(string.IsNullOrEmpty(c.Name) || Globals.grapherControls.ContainsKey(c.Name)))
+                Globals.grapherControls.Add(c.Name, c);
+
             foreach (var child in c.Controls)
                 PopulateControlsList(child as Control);
         }

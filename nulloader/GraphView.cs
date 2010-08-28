@@ -26,6 +26,10 @@ namespace nulloader
 
         public string NumberFormatString { get { return graph.L; } set { graph.L = value; Redraw(); } }
 
+        public Color XAxisColor { get { return graph.U; } set { graph.U = value; Redraw(); } }
+        public Color YAxisColor { get { return graph.V; } set { graph.V = value; Redraw(); } }
+        public Color ZAxisColor { get { return graph.W; } set { graph.W = value; Redraw(); } }
+
         public bool DrawGridlines { get { return graph.P; } set { graph.P = value; Redraw(); } }
         public bool DrawAxes { get { return graph.R; } set { graph.R = value; Redraw(); } }
         public bool DrawLabels { get { return graph.S; } set { graph.S = value; Redraw(); } }

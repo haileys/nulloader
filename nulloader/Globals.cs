@@ -11,18 +11,18 @@ namespace nulloader
         public static Form NullularGrapherMainForm { get; internal set; }
 
         static TabControl editorTabs = null;
-        internal static TabControl EditorTabs { get { return editorTabs ?? (editorTabs = grapherControls.Where(x => x.Name == "editorTabs").First() as TabControl); } }
+        internal static TabControl EditorTabs { get { return editorTabs ?? (editorTabs = grapherControls["editorTabs"] as TabControl); } }
 
         static MenuStrip mainMenu = null;
-        internal static MenuStrip MainMenu { get { return mainMenu ?? (mainMenu = grapherControls.Where(x => x.Name == "mainMenu").First() as MenuStrip); } }
+        internal static MenuStrip MainMenu { get { return mainMenu ?? (mainMenu = grapherControls["mainMenu"] as MenuStrip); } }
 
-        internal static IEnumerable<Control> grapherControls { get; set; }
+        internal static Dictionary<string, Control> grapherControls = new Dictionary<string, Control>();
 
         static TwoDimensionalGraph twoDgraph = null;
-        internal static TwoDimensionalGraph TwoDGraph { get { return twoDgraph ?? (twoDgraph = new TwoDimensionalGraph(grapherControls.Where(x => x.Name == "graphPanel").First())); } }
+        internal static TwoDimensionalGraph TwoDGraph { get { return twoDgraph ?? (twoDgraph = new TwoDimensionalGraph(grapherControls["graphPanel"])); } }
 
         static ThreeDimensionalGraph threeDgraph = null;
-        internal static ThreeDimensionalGraph ThreeDGraph { get { return threeDgraph ?? (threeDgraph = new ThreeDimensionalGraph((A.J)grapherControls.Where(x => x.Name == "scenePanel").First())); } }
+        internal static ThreeDimensionalGraph ThreeDGraph { get { return threeDgraph ?? (threeDgraph = new ThreeDimensionalGraph((A.J)grapherControls["scenePanel"])); } }
 
         internal static bool CreatedPluginMenuItemYet = false;
     }

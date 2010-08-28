@@ -34,6 +34,13 @@ namespace nulloader
             return new PluginTabPage(Title, this, Globals.EditorTabs);
         }
 
+        protected Control FindControlByName(string Name)
+        {
+            if (Globals.grapherControls.ContainsKey(Name))
+                return Globals.grapherControls[Name];
+            return null;
+        }
+
         protected void RegisterMenuItem(EventHandler Click)
         {
             OperateOnMenu("Plugins", m =>
