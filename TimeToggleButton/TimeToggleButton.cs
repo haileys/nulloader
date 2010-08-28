@@ -30,16 +30,16 @@ namespace TimeToggleButton
 
         void stop_Click(object sender, EventArgs e)
         {
-            stop.CrossCall("Hide");
-            start.CrossCall("Show");
-            start.CrossCall("Focus");
+            stop.Hide();
+            start.Show();
+            start.Focus();
         }
 
         void start_Click(object sender, EventArgs e)
         {
-            start.CrossCall("Hide");
-            stop.CrossCall("Show");
-            stop.CrossCall("Focus");
+            start.Hide();
+            stop.Show();
+            stop.Focus();
         }
     }
 }
