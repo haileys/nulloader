@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing;
 using nulloader;
 
 namespace TestPlugin
@@ -14,6 +15,8 @@ namespace TestPlugin
         {
             RegisterMenuItem((s, e) => MessageBox.Show("Hello, world!"));
             var tabpage = CreateEditorTab("test tab :D");
+
+            TwoDimensionalGraph.BackgroundColor = Color.Black;
         }
 
         public System.Drawing.Image GetIcon()

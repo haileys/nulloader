@@ -18,6 +18,12 @@ namespace nulloader
 
         internal static IEnumerable<Control> grapherControls { get; set; }
 
+        static TwoDimensionalGraph twoDgraph = null;
+        internal static TwoDimensionalGraph TwoDGraph { get { return twoDgraph ?? (twoDgraph = new TwoDimensionalGraph(grapherControls.Where(x => x.Name == "graphPanel").First())); } }
+
+        static ThreeDimensionalGraph threeDgraph = null;
+        internal static ThreeDimensionalGraph ThreeDGraph { get { return threeDgraph ?? (threeDgraph = new ThreeDimensionalGraph((A.J)grapherControls.Where(x => x.Name == "scenePanel").First())); } }
+
         internal static bool CreatedPluginMenuItemYet = false;
     }
 }

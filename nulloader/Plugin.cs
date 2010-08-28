@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Reflection;
 
 namespace nulloader
 {
@@ -72,5 +73,8 @@ namespace nulloader
             
             return true;
         }
+
+        protected TwoDimensionalGraph TwoDimensionalGraph { get { return Globals.TwoDGraph; } }
+        protected ThreeDimensionalGraph ThreeDimensionalGraph { get { return Globals.ThreeDGraph; } }
     }
 }
