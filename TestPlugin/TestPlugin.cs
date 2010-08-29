@@ -24,11 +24,13 @@ namespace TestPlugin
             TwoDimensionalGraph.YAxisColor = Color.Black;
             TwoDimensionalGraph.DrawGridlines = false;
 
-            TwoDimensionalGraph.RegisterDrawHook(g => g.FillRectangle(Brushes.Red, new Rectangle(50, 50, 50, 50)));
-            TwoDimensionalGraph.Redraw();
-
             RegisterConstant("charlie", 5);
-            RegisterFunction("hurr", 1, args => (float)Math.Sin(args[0]));
+            RegisterFunction("hurr", 1, Hurr);
+        }
+
+        public float Hurr(float[] x)
+        {
+            return (float)Math.Sin(x[0]);
         }
 
         public System.Drawing.Image GetIcon()

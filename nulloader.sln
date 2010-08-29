@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPlugin", "TestPlugin\Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeToggleButton", "TimeToggleButton\TimeToggleButton.csproj", "{2DB7A396-2263-4EB8-B01E-F1D340D55C3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pong", "Pong\Pong.csproj", "{A57DFE66-ED9B-49FB-B3BF-6277847780F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,16 @@ Global
 		{2DB7A396-2263-4EB8-B01E-F1D340D55C3F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2DB7A396-2263-4EB8-B01E-F1D340D55C3F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2DB7A396-2263-4EB8-B01E-F1D340D55C3F}.Release|x86.ActiveCfg = Release|Any CPU
+		{A57DFE66-ED9B-49FB-B3BF-6277847780F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A57DFE66-ED9B-49FB-B3BF-6277847780F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A57DFE66-ED9B-49FB-B3BF-6277847780F1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A57DFE66-ED9B-49FB-B3BF-6277847780F1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A57DFE66-ED9B-49FB-B3BF-6277847780F1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A57DFE66-ED9B-49FB-B3BF-6277847780F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A57DFE66-ED9B-49FB-B3BF-6277847780F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A57DFE66-ED9B-49FB-B3BF-6277847780F1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A57DFE66-ED9B-49FB-B3BF-6277847780F1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A57DFE66-ED9B-49FB-B3BF-6277847780F1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
