@@ -4,11 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace nulloader
 {
     public static class Util
     {
+        [DllImport("user32.dll")]
+        extern static bool LockWindowUpdate(IntPtr hWndLock);
+
+        public static bool Lock(this Control ctl)
+        {
+            return LockWindowUpdate(ctl.Handle);
+        }
+        public static bool Unlock(this Control ctl)
+        {
+            return LockWindowUpdate(IntPtr.Zero);
+        }
+
         public static Type GetNullsType(string FullName)
         {
             return Assembly.GetAssembly(typeof(A.A))
@@ -17,11 +30,15 @@ namespace nulloader
         }
         public static object CrossCall(this Control obj, string Method, params object[] args)
         {
-            return obj.Invoke((MethodInvoker)(() => obj.GetType().GetMethod(Method).Invoke(obj, args)));
+            return obj.Invoke((MethodInvoker)(() => obj.GetType().GetMethod(Method, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Invoke(obj, args)));
         }
         public static FieldBinding Field(this object o, string FieldName)
         {
-            return new FieldBinding { o = o, f = o.GetType().GetField(FieldName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public) };
+            FieldInfo fi = null;
+            for (var t = o.GetType(); t != typeof(object) && fi == null; t = t.BaseType)
+                fi = t.GetField(FieldName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+
+            return new FieldBinding { o = o, f = fi };
         }
         public class FieldBinding
         {

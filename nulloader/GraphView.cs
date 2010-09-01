@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace nulloader
 {
     public class GraphView
     {
-        A.F graph;
+        protected A.F graph;
 
         internal GraphView(A.F graph)
         {
@@ -38,6 +39,9 @@ namespace nulloader
 
         public Image TakeSnapshot()
         {
+            if (graph.Field("BC").Get() == null)
+                Redraw();
+
             return graph.DC();
         }
 

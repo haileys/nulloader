@@ -51,13 +51,13 @@ namespace Pong
 
             if (BallY > 10)
             {
-                BallDirY *= -1;
+                BallDirY *= -1.05f;
                 BallY = 9.5f;
             }
             if (BallY < -10)
             {
-                BallDirY *= -1;
-                BallY = 9.5f;
+                BallDirY *= -1.05f;
+                BallY = -9.5f;
             }
 
             if (BallX < -9)
@@ -68,7 +68,7 @@ namespace Pong
                     Begin();
                 }
                 else
-                    BallDirX *= -1;
+                    BallDirX *= -1.05f;
             }
 
             if (BallX > 9)
@@ -79,28 +79,37 @@ namespace Pong
                     Begin();
                 }
                 else
-                    BallDirX *= -1;
+                    BallDirX *= -1.05f;
             }
         }
 
         void Begin()
         {
-            BallDirX = rand.Next(-1, 2);
-            BallDirY = rand.Next(-1, 2);
+            BallDirX = 0;
+            while (BallDirX == 0)
+                BallDirX = rand.Next(-2, 4) / 4f;
+
+            BallDirY = 0;
+            while (BallDirY == 0)
+                BallDirY = rand.Next(-2, 4) / 4f;
             BallX = 0;
             BallY = 0;
             running = true;
         }
 
         bool running = false;
+        float last_time;
 
         public float pong(float[] args)
         {
             float x = args[0];
             float y = args[1];
 
-            if (x == -10 && y == 10 && running)
+            if (running && last_time < Math.Floor(args[2] * 16))
+            {
+                last_time = (float)Math.Floor(args[2] * 16);
                 Pong_Tick();
+            }
 
             if (args[2] /* time */ > 0 && !running)
                 Begin();

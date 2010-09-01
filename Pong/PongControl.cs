@@ -23,7 +23,7 @@ namespace Pong
 
         public void SetScore(int A, int B)
         {
-            label1.Text = A.ToString() + " - " + B.ToString();
+            label1.Invoke((MethodInvoker)(() => label1.Text = A.ToString() + " - " + B.ToString()));
         }
 
         private void PongControl_Resize(object sender, EventArgs e)

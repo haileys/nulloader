@@ -6,6 +6,10 @@ using System.Drawing;
 using System.Reflection;
 using A;
 using System.Runtime.InteropServices;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
+using System.Threading;
 
 namespace nulloader
 {
@@ -33,6 +37,54 @@ namespace nulloader
         {
             foreach (var hook in drawHooks)
                 hook.DynamicInvoke(g);
+        }
+
+        public Image TakeSnapshot(int Width, int Height)
+        {
+            // emulates ZD's high OnPaint, but with the set height and width.
+            // !!! subject to breakage !!!
+
+            Size tSz = Size.Empty;
+            Size gSz = Size.Empty;
+
+
+            graph.Invoke((MethodInvoker)(() =>
+            {
+                Globals.NullularGrapherMainForm.UseWaitCursor = true;
+                graph.Lock();
+
+                var tabs = (TabControl)graph.Parent.Parent;
+
+                tSz = tabs.Size;
+                gSz = graph.Size;
+
+                tabs.Dock = DockStyle.None;
+                tabs.Size = new Size(Width + (tSz.Width - gSz.Width), Height + (tSz.Height - gSz.Height));
+            }));
+
+            Redraw();
+
+            Image img = null;
+            graph.Invoke((MethodInvoker)(() => img = TakeSnapshot()));
+
+            while (img == null)
+                Thread.Sleep(10);
+
+            graph.Invoke((MethodInvoker)(() =>
+            {
+                var tabs = (TabControl)graph.Parent.Parent;
+
+                tabs.Dock = DockStyle.Fill;
+
+                tabs.Size = tSz;
+                graph.Size = gSz;
+
+                Globals.NullularGrapherMainForm.UseWaitCursor = false;
+            }));
+
+            graph.Unlock();
+
+            return img;
         }
     }
 }
