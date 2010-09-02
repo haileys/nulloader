@@ -14,7 +14,7 @@ If there's anything you need help with, or if you've found a bug, feel free to [
 ## Known Issues
 
 * Nullular Grapher crashes whenever system dialogs are opened. This is caused by the cross-thread interaction from nulloader.
-* * If anyone knows anything about this kinda stuff, can you please fork this and fix it? Thanks :)
+  * If anyone knows anything about this kinda stuff, can you please fork this and fix it? Thanks :)
 
 ## License
 
