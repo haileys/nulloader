@@ -15,6 +15,8 @@ namespace nulloader
 
         public Guid PluginGuid { get; private set; }
 
+        public ExpressionsList Expressions { get; private set; }
+
         public string Name { get; private set; }
         public Image Icon { get; private set; }
 
@@ -28,6 +30,8 @@ namespace nulloader
             Icon = this is IPluginIcon? (this as IPluginIcon).GetIcon() : Properties.Resources.plugin;
 
             PluginGuid = Guid.NewGuid();
+
+            Expressions = new ExpressionsList((RichTextBox)FindControlByName("expressionTextBox"));
         }
 
         protected TabPage CreateEditorTab(string Title)
