@@ -54,23 +54,22 @@ namespace calculus
         [UserAction]
         public void Derive()
         {
-            Expressions.Add(Derive(Expressions[0]));
+            Expressions.Add(Derive(Expressions.CurrentExpression));
         }
 
         [UserAction("Find Stationary Points")]
         public void FindStationaryPoints()
         {
-            Expressions.Add((Derive(Expressions[0]).Replace("y=", "0=")));
+            Expressions.Add((Derive(Expressions.CurrentExpression).Replace("y=", "0=")));
             (FindControlByName("intersectionsCheckBox") as CheckBox).Checked = true;
         }
 
         [UserAction]
         public void Integrate()
         {
-            var expr = Expressions[0];
+            var expr = Expressions.CurrentExpression;
 
-            expr = Regex.Replace(expr, @"x(^){0}", "x^1");
-            var derivative = Regex.Replace(expr, @"([0-9\.]*)x\^([0-9\.]+)", m =>
+            var derivative = Regex.Replace(MakeFirstDegreeExplicit(expr), @"([0-9\.]*)x\^([0-9\.]+)", m =>
             {
                 var coefficient = decimal.Parse(string.IsNullOrEmpty(m.Groups[1].Value) ? "1" : m.Groups[1].Value);
                 var degree = decimal.Parse(m.Groups[2].Value);
@@ -84,7 +83,7 @@ namespace calculus
 
         string Derive(string Expression)
         {
-            return Regex.Replace(Expression, @"([0-9\.]*)x\^([0-9\.]+)", m =>
+            return Regex.Replace(MakeFirstDegreeExplicit(MakeConstantExplicit(Expression)), @"([0-9\.]*)x\^([0-9\.]+)", m =>
             {
                 var coefficient = decimal.Parse(string.IsNullOrEmpty(m.Groups[1].Value) ? "1" : m.Groups[1].Value);
                 var degree = decimal.Parse(m.Groups[2].Value);
@@ -92,6 +91,41 @@ namespace calculus
                 return coefficient + "(" + degree + ")x^" + (degree - 1).ToString();
             },
             RegexOptions.Compiled);
+        }
+
+        string MakeConstantExplicit(string polynomial)
+        {
+            return Regex.Replace(polynomial, @"([+\-=])([0-9.])([+-]|$)", m => m.Groups[1].Value + "(" + m.Groups[2].Value + "x^0)" + m.Groups[3].Value);
+        }
+
+        string MakeFirstDegreeExplicit(string polynomial)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < polynomial.Length; i++)
+            {
+                sb.Append(polynomial[i]);
+
+                if (polynomial[i] != 'x')
+                    continue;
+
+                if (i + 1 == polynomial.Length)
+                {
+                    sb.Append("^1");
+                    break;
+                }
+
+                if (i != 0 && char.IsLetter(polynomial[i - 1]))
+                    continue;
+
+                if (i + 1 != polynomial.Length && char.IsLetter(polynomial[i + 1]))
+                    continue;
+
+                if(i + 1 != polynomial.Length && polynomial[i + 1] != '^')
+                    sb.Append("^1");
+
+            }
+
+            return sb.ToString();
         }
 
         public Image GetIcon()
