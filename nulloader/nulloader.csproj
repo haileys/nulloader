@@ -52,12 +52,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PluginManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PluginManagerForm.Designer.cs">
+      <DependentUpon>PluginManagerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExpressionsList.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="GraphView.cs" />
     <Compile Include="IPluginIcon.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginAttributes.cs" />
+    <Compile Include="PluginManager.cs" />
     <Compile Include="PluginTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -66,6 +73,14 @@
     <Compile Include="ThreeDimensionalGraph.cs" />
     <Compile Include="TwoDimensionalGraph.cs" />
     <Compile Include="Util.cs" />
+    <None Include="Resources\plugin_edit.png" />
+    <None Include="Resources\error.png" />
+    <None Include="Resources\control_play_blue.png" />
+    <None Include="Resources\accept.png" />
+    <None Include="Resources\delete.png" />
+    <EmbeddedResource Include="PluginManagerForm.resx">
+      <DependentUpon>PluginManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -76,6 +91,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="disabled.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

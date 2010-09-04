@@ -40,24 +40,12 @@ namespace nulloader
 
                 Globals.MainMenu.Items.Add(
                     new ToolStripMenuItem("Plugins", null,
-                        new ToolStripMenuItem("(none)") { Enabled = false }
+                        new ToolStripMenuItem("Plugin Manager", Resources.plugin_edit, (s,e)=>PluginManagerForm.Open()),
+                        new ToolStripSeparator()
                         ));
             }));
 
-            if (!Directory.Exists("plugins"))
-                return;
-            
-            var noargs = new Type[0];
-
-            Plugin[] Plugins = Directory.GetFiles("plugins", "*.dll", SearchOption.TopDirectoryOnly)
-                .Select(f => { try { return Assembly.LoadFile(Path.Combine(Environment.CurrentDirectory, f)); } catch { return null; } })
-                .Where(a => a != null)
-                .SelectMany(a => a.GetExportedTypes())
-                .Where(t => t.IsSubclassOf(typeof(Plugin)))
-                .Select(t => t.GetConstructor(noargs))
-                .Where(c => c != null)
-                .Select(c => (Plugin)c.Invoke(noargs))
-                .ToArray();
+            PluginManager.Init();
         }
 
         public static void PopulateControlsList(Control c)

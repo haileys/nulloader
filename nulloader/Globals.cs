@@ -23,7 +23,5 @@ namespace nulloader
 
         static ThreeDimensionalGraph threeDgraph = null;
         internal static ThreeDimensionalGraph ThreeDGraph { get { return threeDgraph ?? (threeDgraph = new ThreeDimensionalGraph((A.J)grapherControls["scenePanel"])); } }
-
-        internal static bool CreatedPluginMenuItemYet = false;
     }
 }

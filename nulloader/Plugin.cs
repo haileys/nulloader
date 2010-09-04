@@ -20,6 +20,8 @@ namespace nulloader
         public string Name { get; private set; }
         public Image Icon { get; private set; }
 
+        internal bool IsEnabled = true;
+
         protected Plugin()
         {
             grapher = Globals.NullularGrapherMainForm;
@@ -66,12 +68,6 @@ namespace nulloader
         {
             OperateOnMenu("Plugins", m =>
             {
-                if (!Globals.CreatedPluginMenuItemYet)
-                {
-                    Globals.CreatedPluginMenuItemYet = true;
-                    m.DropDownItems.Clear();
-                }
-
                 var tsi = m.DropDownItems.Add(Name, Icon);
 
                 tsi.Click += Click;

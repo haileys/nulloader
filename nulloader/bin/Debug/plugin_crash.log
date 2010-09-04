@@ -1,0 +1,40 @@
+** Crash: TestPlugin.TestPlugin - 4/09/2010 8:39:07 PM
+    System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: test
+       at TestPlugin.TestPlugin..ctor()
+       --- End of inner exception stack trace ---
+       at System.RuntimeMethodHandle._InvokeConstructor(IRuntimeMethodInfo method, Object[] args, SignatureStruct& signature, RuntimeType declaringType)
+       at System.RuntimeMethodHandle.InvokeConstructor(IRuntimeMethodInfo method, Object[] args, SignatureStruct signature, RuntimeType declaringType)
+       at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+       at System.Reflection.ConstructorInfo.Invoke(Object[] parameters)
+       at nulloader.PluginManager.Start(Type PluginType) in D:\Documents\Visual Studio 2010\Projects\nulloader\nulloader\PluginManager.cs:line 69
+       at nulloader.PluginManager.Init() in D:\Documents\Visual Studio 2010\Projects\nulloader\nulloader\PluginManager.cs:line 42
+** Crash: TimeToggleButton.TimeToggleButton - 4/09/2010 8:39:39 PM
+    System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.InvalidOperationException: Invoke or BeginInvoke cannot be called on a control until the window handle has been created.
+       at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+       at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+       at System.Windows.Forms.Control.Invoke(Delegate method)
+       at nulloader.Plugin.OperateOnControl(Control control, Action`1 action) in D:\Documents\Visual Studio 2010\Projects\nulloader\nulloader\Plugin.cs:line 109
+       at TimeToggleButton.TimeToggleButton..ctor()
+       --- End of inner exception stack trace ---
+       at System.RuntimeMethodHandle._InvokeConstructor(IRuntimeMethodInfo method, Object[] args, SignatureStruct& signature, RuntimeType declaringType)
+       at System.RuntimeMethodHandle.InvokeConstructor(IRuntimeMethodInfo method, Object[] args, SignatureStruct signature, RuntimeType declaringType)
+       at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+       at System.Reflection.ConstructorInfo.Invoke(Object[] parameters)
+       at nulloader.PluginManager.Start(Type PluginType) in D:\Documents\Visual Studio 2010\Projects\nulloader\nulloader\PluginManager.cs:line 69
+       at nulloader.PluginManager.Init() in D:\Documents\Visual Studio 2010\Projects\nulloader\nulloader\PluginManager.cs:line 42
+** Crash: TestPlugin.TestPlugin - 4/09/2010 8:40:21 PM
+    System.Exception: test
+       at TestPlugin.TestPlugin..ctor()
+** Crash: TimeToggleButton.TimeToggleButton - 4/09/2010 8:42:24 PM
+    System.InvalidOperationException: Invoke or BeginInvoke cannot be called on a control until the window handle has been created.
+       at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+       at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+       at System.Windows.Forms.Control.Invoke(Delegate method)
+       at nulloader.Plugin.OperateOnControl(Control control, Action`1 action) in D:\Documents\Visual Studio 2010\Projects\nulloader\nulloader\Plugin.cs:line 109
+       at TimeToggleButton.TimeToggleButton..ctor()
+** Crash: TestPlugin.TestPlugin - 4/09/2010 8:42:39 PM
+    System.Exception: test
+       at TestPlugin.TestPlugin..ctor()
+** Crash: TestPlugin.TestPlugin - 4/09/2010 8:43:15 PM
+    System.Exception: test
+       at TestPlugin.TestPlugin..ctor()
