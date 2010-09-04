@@ -65,20 +65,44 @@ namespace calculus
         }
 
         [UserAction]
+        public void Antiderive()
+        {
+            Expressions.Add(Antiderive(Expressions.CurrentExpression));
+        }
+
+        [UserAction]
         public void Integrate()
         {
-            var expr = Expressions.CurrentExpression;
+            var dlg = new Integrate(Expressions.CurrentExpression);
+            dlg.Ok += Integrate_Ok;
+            dlg.ShowDialog();
+        }
 
-            var derivative = Regex.Replace(MakeFirstDegreeExplicit(expr), @"([0-9\.]*)x\^([0-9\.]+)", m =>
+        void Integrate_Ok(Integrate.IntegrationDialogResponse Response)
+        {
+            var antiderivative = Antiderive(Response.Expression).Replace("y=", "");
+
+            // pretty highlighting
+            Expressions.Add(string.Format("y<({0})&y>0&x>{1}&x<{2}", Response.Expression, Response.XMin, Response.XMax));
+            Expressions.Add(string.Format("y>({0})&y<0&x>{1}&x<{2}", Response.Expression, Response.XMin, Response.XMax));
+
+            // calculating the signed area bound by the x axis
+            var min_sub_in = Regex.Replace(antiderivative, @"([^a-z]|^)x([^a-z]|$)", m => m.Groups[1].Value + "(" + Response.XMin + ")" + m.Groups[2].Value, RegexOptions.Compiled);
+            var max_sub_in = Regex.Replace(antiderivative, @"([^a-z]|^)x([^a-z]|$)", m => m.Groups[1].Value + "(" + Response.XMax + ")" + m.Groups[2].Value, RegexOptions.Compiled);
+
+            Expressions.Add(string.Format("({0})-({1})", max_sub_in, min_sub_in));
+        }
+
+        string Antiderive(string Expression)
+        {
+            return Regex.Replace(MakeFirstDegreeExplicit(MakeConstantExplicit(Expression)), @"([0-9\.]*)x\^([0-9\.]+)", m =>
             {
                 var coefficient = decimal.Parse(string.IsNullOrEmpty(m.Groups[1].Value) ? "1" : m.Groups[1].Value);
                 var degree = decimal.Parse(m.Groups[2].Value);
 
-                return (coefficient/(degree + 1)) + "x^" + (degree + 1).ToString();
+                return (coefficient / (degree + 1)) + "x^" + (degree + 1).ToString();
             },
             RegexOptions.Compiled);
-
-            Expressions.Add(derivative);
         }
 
         string Derive(string Expression)
@@ -95,7 +119,8 @@ namespace calculus
 
         string MakeConstantExplicit(string polynomial)
         {
-            return Regex.Replace(polynomial, @"([+\-=])([0-9.])([+-]|$)", m => m.Groups[1].Value + "(" + m.Groups[2].Value + "x^0)" + m.Groups[3].Value);
+            var s = Regex.Replace(polynomial, @"([+\-=]|^)([0-9.]+)([+-]|$)", m => m.Groups[1].Value + "(" + m.Groups[2].Value + "x^0)" + m.Groups[3].Value);
+            return s;
         }
 
         string MakeFirstDegreeExplicit(string polynomial)

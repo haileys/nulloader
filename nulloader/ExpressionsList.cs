@@ -66,7 +66,14 @@ namespace nulloader
             {
                 if (rtb.Lines.Length == 0)
                     return "";
-                return rtb.Lines[index];
+                try
+                {
+                    return rtb.Lines[index];
+                }
+                catch
+                {
+                    return "";
+                }
             }
             set
             {
