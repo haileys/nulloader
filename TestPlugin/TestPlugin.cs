@@ -13,6 +13,8 @@ namespace TestPlugin
     {
         public TestPlugin()
         {
+            throw new Exception("Hello, World");
+
             RegisterMenuItem((s, e) => MessageBox.Show("Hello, world!"));
 
             OperateOnControl(CreateEditorTab("test tab :D"), tabpage =>

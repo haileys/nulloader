@@ -38,3 +38,20 @@
 ** Crash: TestPlugin.TestPlugin - 4/09/2010 8:43:15 PM
     System.Exception: test
        at TestPlugin.TestPlugin..ctor()
+** Crash: TestPlugin.TestPlugin - 5/09/2010 12:09:27 AM
+    System.Exception: Hello, World
+       at TestPlugin.TestPlugin..ctor()
+** Crash: TimeToggleButton.TimeToggleButton - 5/09/2010 12:09:30 AM
+    System.InvalidOperationException: Invoke or BeginInvoke cannot be called on a control until the window handle has been created.
+       at System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+       at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+       at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+       at System.Windows.Forms.Control.Invoke(Delegate method)
+       at nulloader.Plugin.OperateOnControl(Control control, Action`1 action) in D:\Documents\Visual Studio 2010\Projects\nulloader\nulloader\Plugin.cs:line 103
+       at TimeToggleButton.TimeToggleButton..ctor()
+** Crash: TestPlugin.TestPlugin - 5/09/2010 12:09:52 AM
+    System.Exception: Hello, World
+       at TestPlugin.TestPlugin..ctor()
+** Crash: TestPlugin.TestPlugin - 5/09/2010 12:10:13 AM
+    System.Exception: Hello, World
+       at TestPlugin.TestPlugin..ctor()

@@ -37,25 +37,7 @@ namespace nulloader
 
             foreach (var plugin in AvailablePlugins.Where(w => w.Enabled))
             {
-                try
-                {
                     Start(plugin.PluginType);
-                }
-                catch (Exception ex)
-                {
-                    List<string> log = new List<string>();
-                    log.Add(string.Format("** Crash: {0} - {1}", plugin.PluginType.FullName, DateTime.Now));
-                    log.AddRange(ex.InnerException.ToString().Split('\n').Select(s => "    " + s));
-                    File.AppendAllLines("plugin_crash.log", log);
-
-                    Disable(plugin.PluginType);
-                    MessageBox.Show(string.Format("An error occurred while loading the plugin '{0}'.\nThis plugin has been disabled and Nullular Grapher will now restart.\n\n\n{1}",
-                        plugin.PluginType.FullName,
-                        ex.InnerException.ToString()), "Plugin Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-
-                    Application.Restart();
-                    return;
-                }
             }
         }
 
@@ -67,7 +49,27 @@ namespace nulloader
 
         public static Plugin Start(Type PluginType)
         {
-            var plugin = PluginType.GetConstructor(new Type[0]).Invoke(new Type[0]) as Plugin;
+            Plugin plugin;
+            try
+            {
+                plugin = PluginType.GetConstructor(new Type[0]).Invoke(new Type[0]) as Plugin;
+            }
+            catch (Exception ex)
+            {
+                List<string> log = new List<string>();
+                log.Add(string.Format("** Crash: {0} - {1}", PluginType.FullName, DateTime.Now));
+                log.AddRange(ex.InnerException.ToString().Split('\n').Select(s => "    " + s));
+                File.AppendAllLines("plugin_crash.log", log);
+
+                Disable(PluginType);
+                MessageBox.Show(string.Format("An error occurred while loading the plugin '{0}'.\nThis plugin has been disabled and Nullular Grapher will now restart.\n\n\n{1}",
+                    PluginType.FullName,
+                    ex.InnerException.ToString()), "Plugin Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+                Application.Restart();
+                Environment.Exit(1);
+                return null;
+            }
             if (!loadedPlugins.Contains(plugin))
                 loadedPlugins.Add(plugin);
             return plugin;
