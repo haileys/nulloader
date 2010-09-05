@@ -129,6 +129,9 @@ namespace calculus
                 var coefficient = decimal.Parse(string.IsNullOrEmpty(m.Groups[1].Value) ? "1" : m.Groups[1].Value);
                 var degree = decimal.Parse(m.Groups[2].Value);
 
+                if (degree == 0)
+                    return "0";
+
                 return coefficient + "(" + degree + ")x^" + (degree - 1).ToString();
             },
             RegexOptions.Compiled);
