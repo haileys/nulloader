@@ -55,3 +55,10 @@
 ** Crash: TestPlugin.TestPlugin - 5/09/2010 12:10:13 AM
     System.Exception: Hello, World
        at TestPlugin.TestPlugin..ctor()
+** Crash: TestPlugin.TestPlugin - 5/09/2010 12:13:14 PM
+    System.ArgumentException: An item with the same key has already been added.
+       at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+       at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+       at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+       at nulloader.Plugin.RegisterConstant(String Name, Single Value) in D:\Documents\Visual Studio 2010\Projects\nulloader\nulloader\Plugin.cs:line 64
+       at TestPlugin.TestPlugin..ctor()

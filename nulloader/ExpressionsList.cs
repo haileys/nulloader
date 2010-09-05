@@ -16,6 +16,16 @@ namespace nulloader
             rtb.SelectionChanged += (s, e) => { if (CurrentChanged != null) CurrentChanged(s, e); };
         }
 
+        public float? Evaluate(string Expression, ref string Error)
+        {
+            return new A.QD(Expression).M(null, null, ref Error);
+        }
+        public float? Evaluate(string Expression)
+        {
+            string error = "";
+            return Evaluate(Expression, ref error);
+        }
+
         void Update()
         {
             Globals.NullularGrapherMainForm.CrossCall("TN", null, new KeyEventArgs(Keys.None));

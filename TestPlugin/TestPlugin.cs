@@ -13,26 +13,7 @@ namespace TestPlugin
     {
         public TestPlugin()
         {
-            throw new Exception("Hello, World");
-
-            RegisterMenuItem((s, e) => MessageBox.Show("Hello, world!"));
-
-            OperateOnControl(CreateEditorTab("test tab :D"), tabpage =>
-            {
-                new Label { Text = "Hello, World!", Parent = tabpage, Left = 50, Top = 50 };
-            });
-
-            TwoDimensionalGraph.XAxisColor = Color.Black;
-            TwoDimensionalGraph.YAxisColor = Color.Black;
-            TwoDimensionalGraph.DrawGridlines = false;
-
-            RegisterConstant("charlie", 5);
-            RegisterFunction("hurr", 1, Hurr);
-        }
-
-        public float Hurr(float[] x)
-        {
-            return (float)Math.Sin(x[0]);
+            MessageBox.Show(Expressions.Evaluate("1*2+3^2-9").ToString());
         }
 
         public System.Drawing.Image GetIcon()
