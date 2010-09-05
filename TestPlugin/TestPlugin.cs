@@ -13,7 +13,7 @@ namespace TestPlugin
     {
         public TestPlugin()
         {
-            MessageBox.Show(Expressions.Evaluate("1*2+3^2-9").ToString());
+            //MessageBox.Show(Expressions.Evaluate("1*2+3^2-9").ToString());
         }
 
         public System.Drawing.Image GetIcon()

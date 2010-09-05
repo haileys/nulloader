@@ -61,6 +61,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tangent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tangent.Designer.cs">
+      <DependentUpon>Tangent.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\nulloader\nulloader.csproj">
@@ -78,6 +84,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tangent.resx">
+      <DependentUpon>Tangent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

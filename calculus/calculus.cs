@@ -51,6 +51,23 @@ namespace calculus
             });
         }
 
+        [UserAction("Find Tangent")]
+        public void Tangent()
+        {
+            var dlg = new Tangent(Expressions.CurrentExpression);
+            dlg.Ok += Tangent_Ok;
+            dlg.ShowDialog();
+        }
+
+        void Tangent_Ok(Tangent.TangentDialogResponse Response)
+        {
+            var derivative = SubIn(Derive(Response.Expression), "x", Response.X.ToString());
+            var y = Expressions.Evaluate(SubIn(Response.Expression, "x", Response.X.ToString()).Replace("y=",""));
+
+            var gradient = Expressions.Evaluate(derivative.Replace("y=", ""));
+            Expressions.Add("y=" + gradient + "x-" + (gradient * (float)Response.X - y));
+        }
+
         [UserAction]
         public void Derive()
         {
@@ -87,8 +104,8 @@ namespace calculus
             Expressions.Add(string.Format("y>({0})&y<0&x>{1}&x<{2}", Response.Expression, Response.XMin, Response.XMax));
 
             // calculating the signed area bound by the x axis
-            var min_sub_in = Regex.Replace(antiderivative, @"([^a-z]|^)x([^a-z]|$)", m => m.Groups[1].Value + "(" + Response.XMin + ")" + m.Groups[2].Value, RegexOptions.Compiled);
-            var max_sub_in = Regex.Replace(antiderivative, @"([^a-z]|^)x([^a-z]|$)", m => m.Groups[1].Value + "(" + Response.XMax + ")" + m.Groups[2].Value, RegexOptions.Compiled);
+            var min_sub_in = SubIn(antiderivative, "x", Response.XMin.ToString());
+            var max_sub_in = SubIn(antiderivative, "x", Response.XMax.ToString());
 
             Expressions.Add(string.Format("({0})-({1})", max_sub_in, min_sub_in));
         }
@@ -115,6 +132,11 @@ namespace calculus
                 return coefficient + "(" + degree + ")x^" + (degree - 1).ToString();
             },
             RegexOptions.Compiled);
+        }
+
+        string SubIn(string Expression, string Pronumeral, string Replacement)
+        {
+            return Regex.Replace(Expression, @"([^a-z]|^)" + Pronumeral + @"([^a-z]|$)", m => m.Groups[1].Value + "(" + Replacement + ")" + m.Groups[2].Value, RegexOptions.Compiled);
         }
 
         string MakeConstantExplicit(string polynomial)

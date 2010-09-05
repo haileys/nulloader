@@ -59,6 +59,7 @@ namespace nulloader
                 List<string> log = new List<string>();
                 log.Add(string.Format("** Crash: {0} - {1}", PluginType.FullName, DateTime.Now));
                 log.AddRange(ex.InnerException.ToString().Split('\n').Select(s => "    " + s));
+                log.Add("\n\n");
                 File.AppendAllLines("plugin_crash.log", log);
 
                 Disable(PluginType);
