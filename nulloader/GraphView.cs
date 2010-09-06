@@ -37,6 +37,11 @@ namespace nulloader
         public bool Antialiasing { get { return graph.T; } set { graph.T = value; Redraw(); } }
 
 
+        public Control GetControl()
+        {
+            return graph;
+        }
+
         public Image TakeSnapshot()
         {
             if (graph.Field("BC").Get() == null)

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "highresrender", "highresren
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "calculus", "calculus\calculus.csproj", "{1FD3A4BC-1E8B-44FD-AB16-FD067EC985A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseWheelZoom", "MouseWheelZoom\MouseWheelZoom.csproj", "{11330640-54EE-4CA6-8137-31AA0ACA2A93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,16 @@ Global
 		{1FD3A4BC-1E8B-44FD-AB16-FD067EC985A2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1FD3A4BC-1E8B-44FD-AB16-FD067EC985A2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1FD3A4BC-1E8B-44FD-AB16-FD067EC985A2}.Release|x86.ActiveCfg = Release|Any CPU
+		{11330640-54EE-4CA6-8137-31AA0ACA2A93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11330640-54EE-4CA6-8137-31AA0ACA2A93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11330640-54EE-4CA6-8137-31AA0ACA2A93}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{11330640-54EE-4CA6-8137-31AA0ACA2A93}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{11330640-54EE-4CA6-8137-31AA0ACA2A93}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{11330640-54EE-4CA6-8137-31AA0ACA2A93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11330640-54EE-4CA6-8137-31AA0ACA2A93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11330640-54EE-4CA6-8137-31AA0ACA2A93}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{11330640-54EE-4CA6-8137-31AA0ACA2A93}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{11330640-54EE-4CA6-8137-31AA0ACA2A93}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
