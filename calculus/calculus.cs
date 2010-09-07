@@ -49,6 +49,17 @@ namespace calculus
                     calculuspanel.flowLayoutPanel1.Controls.Add(button);
                 }
             });
+
+            TwoDimensionalGraph.RegisterDrawHook(DrawHook);
+            TwoDimensionalGraph.GetControl().DoubleClick += Calculus_DoubleClick;
+        }
+
+        void Calculus_DoubleClick(object sender, EventArgs e)
+        {
+            if (tracing != null)
+            {
+                Expressions.Add(FindTangentLine(tracing, (decimal)tracing_x));
+            }
         }
 
         [UserAction("Find Tangent")]
@@ -59,13 +70,62 @@ namespace calculus
             dlg.ShowDialog();
         }
 
+
+        string tracing = null;
+        float tracing_x;
+        [UserAction("Trace Tangent")]
+        public void TraceTangent()
+        {
+            if (tracing == null)
+                tracing = Expressions.CurrentExpression;
+            else
+                tracing = null;
+
+            (FindControlByName("tracingCheckBox")as CheckBox).Checked = tracing != null;
+        }
+
+        void DrawHook(Graphics g)
+        {
+            if (tracing == null)
+                return;
+
+            var window = TwoDimensionalGraph.Window;
+
+            foreach(var expr in (FindControlByName("tracingTextBox") as TextBox).Lines
+                .Where(s => s.Contains(tracing))
+                .Select(s => Regex.Split(s, "=>").Select(spl => spl.Trim()))
+                .Select(sa => new { Expression = sa.First(), Point = sa.Last() }))
+            {
+                var match = Regex.Match(expr.Point, @"([\-0-9.]+)\s*,\s*([\-0-9.]+)");
+                if (!match.Success)
+                    continue;
+
+                var x = tracing_x = float.Parse(match.Groups[1].Value);
+                var y = float.Parse(match.Groups[2].Value);
+
+                Func<PointF,PointF> tsc = TwoDimensionalGraph.TranslateToScreenCoords;
+
+                var tang = FindTangentLine(expr.Expression, (decimal)x).Replace("y=","");
+
+                PointF topleft = new PointF(x - window.Width, (float)Expressions.Evaluate(SubIn(tang, "x", (x - window.Width).ToString())));
+                PointF bottomright = new PointF(x + window.Width, (float)Expressions.Evaluate(SubIn(tang, "x", (x + window.Width).ToString())));
+
+                g.DrawLine(Pens.Red, tsc(topleft), tsc(bottomright));
+            }
+        }
+
         void Tangent_Ok(Tangent.TangentDialogResponse Response)
         {
-            var derivative = SubIn(Derive(Response.Expression), "x", Response.X.ToString());
-            var y = Expressions.Evaluate(SubIn(Response.Expression, "x", Response.X.ToString()).Replace("y=",""));
+            Expressions.Add(FindTangentLine(Response.Expression, Response.X));
+        }
+
+        string FindTangentLine(string Expression, decimal X)
+        {
+            var derivative = SubIn(Derive(Expression), "x", X.ToString());
+            var y = Expressions.Evaluate(SubIn(Expression, "x", X.ToString()).Replace("y=", ""));
 
             var gradient = Expressions.Evaluate(derivative.Replace("y=", ""));
-            Expressions.Add("y=" + gradient + "x-" + (gradient * (float)Response.X - y));
+            return "y=" + gradient + "x-" + (gradient * (float)X - y);
         }
 
         [UserAction]

@@ -1,0 +1,22 @@
+** Crash: Pong.Pong - 7/09/2010 8:05:20 PM
+    System.InvalidOperationException: Invoke or BeginInvoke cannot be called on a control until the window handle has been created.
+       at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+       at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+       at System.Windows.Forms.Control.Invoke(Delegate method)
+       at nulloader.PluginTabPage..ctor(String Title, Plugin Owner, TabControl Parent) in d:\documents\visual studio 2010\Projects\nulloader\nulloader\PluginTabPage.cs:line 20
+       at nulloader.Plugin.CreateEditorTab(String Title) in d:\documents\visual studio 2010\Projects\nulloader\nulloader\Plugin.cs:line 41
+       at Pong.Pong..ctor()
+
+
+
+** Crash: Regression.Regression - 7/09/2010 8:06:15 PM
+    System.InvalidOperationException: Invoke or BeginInvoke cannot be called on a control until the window handle has been created.
+       at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+       at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+       at System.Windows.Forms.Control.Invoke(Delegate method)
+       at nulloader.PluginTabPage..ctor(String Title, Plugin Owner, TabControl Parent) in d:\documents\visual studio 2010\Projects\nulloader\nulloader\PluginTabPage.cs:line 20
+       at nulloader.Plugin.CreateEditorTab(String Title) in d:\documents\visual studio 2010\Projects\nulloader\nulloader\Plugin.cs:line 41
+       at Regression.Regression..ctor()
+
+
+

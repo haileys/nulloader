@@ -28,6 +28,40 @@ namespace nulloader
 
         List<Delegate> drawHooks = new List<Delegate>();
 
+        Control xMinCtl = Plugin._FindControlByName("xMinTextBox");
+        Control xMaxCtl = Plugin._FindControlByName("xMaxTextBox");
+        Control yMinCtl = Plugin._FindControlByName("yMinTextBox");
+        Control yMaxCtl = Plugin._FindControlByName("yMaxTextBox");
+
+        public RectangleF Window
+        {
+            get
+            {
+                var xmin = float.Parse(xMinCtl.Text);
+                var ymin = float.Parse(yMinCtl.Text);
+
+                return new RectangleF(xmin,ymin, float.Parse(xMaxCtl.Text)-xmin, float.Parse(yMaxCtl.Text)-ymin);
+            }
+            set
+            {
+                xMinCtl.Text = value.Left.ToString();
+                yMinCtl.Text = value.Top.ToString();
+
+                xMaxCtl.Text = value.Right.ToString();
+                yMaxCtl.Text = value.Bottom.ToString();
+            }
+        }
+
+        public PointF TranslateToScreenCoords(PointF GraphCoords)
+        {
+            var gr = Window;
+
+            var x = ((GraphCoords.X-gr.Left) / gr.Width) * graph.Width;
+            var y = ((-GraphCoords.Y-gr.Top) / gr.Height) * graph.Height;
+
+            return new PointF(x, y);
+        }
+
         public void RegisterDrawHook(Action<Graphics> callback)
         {
             drawHooks.Add(callback);

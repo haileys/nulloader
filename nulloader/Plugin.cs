@@ -41,11 +41,16 @@ namespace nulloader
             return new PluginTabPage(Title, this, Globals.EditorTabs);
         }
 
-        protected Control FindControlByName(string Name)
+
+        internal static Control _FindControlByName(string Name)
         {
             if (Globals.grapherControls.ContainsKey(Name))
                 return Globals.grapherControls[Name];
             return null;
+        }
+        protected Control FindControlByName(string Name)
+        {
+            return _FindControlByName(Name);
         }
 
         protected void RegisterFunction(string Name, int NumParams, Func<float[], float> Callback)

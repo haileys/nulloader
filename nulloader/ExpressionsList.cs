@@ -18,7 +18,12 @@ namespace nulloader
 
         public float? Evaluate(string Expression, ref string Error)
         {
-            return new A.QD(Expression).M(null, null, ref Error);
+            try
+            {
+                return new A.QD(Expression).M(null, null, ref Error);
+            }
+            catch (NullReferenceException)
+            { return 0; }
         }
         public float? Evaluate(string Expression)
         {

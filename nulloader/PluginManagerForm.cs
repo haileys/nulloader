@@ -75,5 +75,11 @@ namespace nulloader
                 runningList.Items.Add(sel);
             }
         }
+
+        private void PluginManagerForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
+        }
     }
 }
