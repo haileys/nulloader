@@ -107,8 +107,8 @@ namespace calculus
 
                 var tang = FindTangentLine(expr.Expression, (decimal)x).Replace("y=","");
 
-                PointF topleft = new PointF(x - window.Width, (float)Expressions.Evaluate(SubIn(tang, "x", (x - window.Width).ToString())));
-                PointF bottomright = new PointF(x + window.Width, (float)Expressions.Evaluate(SubIn(tang, "x", (x + window.Width).ToString())));
+                PointF topleft = new PointF(x - window.Width, (float)Expressions.Evaluate(Expressions.SubIn(tang, "x", (x - window.Width).ToString())));
+                PointF bottomright = new PointF(x + window.Width, (float)Expressions.Evaluate(Expressions.SubIn(tang, "x", (x + window.Width).ToString())));
 
                 g.DrawLine(Pens.Red, tsc(topleft), tsc(bottomright));
             }
@@ -121,8 +121,8 @@ namespace calculus
 
         string FindTangentLine(string Expression, decimal X)
         {
-            var derivative = SubIn(Derive(Expression), "x", X.ToString());
-            var y = Expressions.Evaluate(SubIn(Expression, "x", X.ToString()).Replace("y=", ""));
+            var derivative = Expressions.SubIn(Derive(Expression), "x", X.ToString());
+            var y = Expressions.Evaluate(Expressions.SubIn(Expression, "x", X.ToString()).Replace("y=", ""));
 
             var gradient = Expressions.Evaluate(derivative.Replace("y=", ""));
             return "y=" + gradient + "x-" + (gradient * (float)X - y);
@@ -164,15 +164,15 @@ namespace calculus
             Expressions.Add(string.Format("y>({0})&y<0&x>{1}&x<{2}", Response.Expression, Response.XMin, Response.XMax));
 
             // calculating the signed area bound by the x axis
-            var min_sub_in = SubIn(antiderivative, "x", Response.XMin.ToString());
-            var max_sub_in = SubIn(antiderivative, "x", Response.XMax.ToString());
+            var min_sub_in = Expressions.SubIn(antiderivative, "x", Response.XMin.ToString());
+            var max_sub_in = Expressions.SubIn(antiderivative, "x", Response.XMax.ToString());
 
             Expressions.Add(string.Format("({0})-({1})", max_sub_in, min_sub_in));
         }
 
         string Antiderive(string Expression)
         {
-            return Regex.Replace(MakeFirstDegreeExplicit(MakeConstantExplicit(Expression)), @"([0-9\.]*)x\^([0-9\.]+)", m =>
+            return Regex.Replace(Expressions.MakeFirstDegreeExplicit(Expressions.MakeConstantExplicit(Expression)), @"([0-9\.]*)x\^([0-9\.]+)", m =>
             {
                 var coefficient = decimal.Parse(string.IsNullOrEmpty(m.Groups[1].Value) ? "1" : m.Groups[1].Value);
                 var degree = decimal.Parse(m.Groups[2].Value);
@@ -184,7 +184,7 @@ namespace calculus
 
         string Derive(string Expression)
         {
-            return Regex.Replace(MakeFirstDegreeExplicit(MakeConstantExplicit(Expression)), @"([0-9\.]*)x\^([0-9\.]+)", m =>
+            return Regex.Replace(Expressions.MakeFirstDegreeExplicit(Expressions.MakeConstantExplicit(Expression)), @"([0-9\.]*)x\^([0-9\.]+)", m =>
             {
                 var coefficient = decimal.Parse(string.IsNullOrEmpty(m.Groups[1].Value) ? "1" : m.Groups[1].Value);
                 var degree = decimal.Parse(m.Groups[2].Value);
@@ -195,47 +195,6 @@ namespace calculus
                 return coefficient + "(" + degree + ")x^" + (degree - 1).ToString();
             },
             RegexOptions.Compiled);
-        }
-
-        string SubIn(string Expression, string Pronumeral, string Replacement)
-        {
-            return Regex.Replace(Expression, @"([^a-z]|^)" + Pronumeral + @"([^a-z]|$)", m => m.Groups[1].Value + "(" + Replacement + ")" + m.Groups[2].Value, RegexOptions.Compiled);
-        }
-
-        string MakeConstantExplicit(string polynomial)
-        {
-            var s = Regex.Replace(polynomial, @"([+\-=]|^)([0-9.]+)([+-]|$)", m => m.Groups[1].Value + "(" + m.Groups[2].Value + "x^0)" + m.Groups[3].Value);
-            return s;
-        }
-
-        string MakeFirstDegreeExplicit(string polynomial)
-        {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < polynomial.Length; i++)
-            {
-                sb.Append(polynomial[i]);
-
-                if (polynomial[i] != 'x')
-                    continue;
-
-                if (i + 1 == polynomial.Length)
-                {
-                    sb.Append("^1");
-                    break;
-                }
-
-                if (i != 0 && char.IsLetter(polynomial[i - 1]))
-                    continue;
-
-                if (i + 1 != polynomial.Length && char.IsLetter(polynomial[i + 1]))
-                    continue;
-
-                if(i + 1 != polynomial.Length && polynomial[i + 1] != '^')
-                    sb.Append("^1");
-
-            }
-
-            return sb.ToString();
         }
 
         public Image GetIcon()

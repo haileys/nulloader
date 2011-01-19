@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseWheelZoom", "MouseWhee
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regression", "Regression\Regression.csproj", "{E86B9ADF-E9CF-4697-AA72-6ECB3629AF79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kari_bridge", "kari_bridge\kari_bridge.csproj", "{0DFA870D-B8A4-407E-B191-433800A930D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,16 @@ Global
 		{E86B9ADF-E9CF-4697-AA72-6ECB3629AF79}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E86B9ADF-E9CF-4697-AA72-6ECB3629AF79}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E86B9ADF-E9CF-4697-AA72-6ECB3629AF79}.Release|x86.ActiveCfg = Release|Any CPU
+		{0DFA870D-B8A4-407E-B191-433800A930D1}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0DFA870D-B8A4-407E-B191-433800A930D1}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0DFA870D-B8A4-407E-B191-433800A930D1}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0DFA870D-B8A4-407E-B191-433800A930D1}.Debug|x86.ActiveCfg = Debug|x86
+		{0DFA870D-B8A4-407E-B191-433800A930D1}.Debug|x86.Build.0 = Debug|x86
+		{0DFA870D-B8A4-407E-B191-433800A930D1}.Release|Any CPU.ActiveCfg = Release|x86
+		{0DFA870D-B8A4-407E-B191-433800A930D1}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0DFA870D-B8A4-407E-B191-433800A930D1}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0DFA870D-B8A4-407E-B191-433800A930D1}.Release|x86.ActiveCfg = Release|x86
+		{0DFA870D-B8A4-407E-B191-433800A930D1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
